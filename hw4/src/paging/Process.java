@@ -16,11 +16,12 @@ public class Process {
     private final Random r = new Random();
     private int pageRefs;
     private final List<Integer> stats = new ArrayList<>();
-
-   
+    private final int name;
+    
     //Constructor to create process and set mem
-    public Process(Memory accessTo) {
+    public Process(Memory accessTo, int name) {
         mem = accessTo;
+        this.name = name;
     }
 
     //Generates the page that process will reference
@@ -31,7 +32,8 @@ public class Process {
             return lastPageIndex;
         }
         int p = r.nextInt(10);
-        if (p < 7) { // 70% chance of locality of reference
+        // locality of reference: 70% probability
+        if (p < 7) {
             lastPageIndex = (lastPageIndex + (r.nextInt(3) - 1)) % 10;
         } else {
             lastPageIndex = (lastPageIndex + (r.nextInt(7) + 2)) % 10;
@@ -61,4 +63,9 @@ public class Process {
         OptionalDouble avgSwap = stats.stream().mapToDouble(a -> a).average();
         return "Average hit ratio: " + (avgSwap.isPresent() ? avgSwap.getAsDouble() / 100.0 : 0) + "\r\n";
     }
+    
+    public int name() {
+    	return this.name;
+    }
+    
 }

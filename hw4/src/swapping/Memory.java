@@ -1,8 +1,10 @@
 package swapping;
 import java.util.ArrayList;
+import java.util.Random;
 
 public abstract class Memory {
     private final ArrayList<String> memory = new ArrayList<>();
+    private int time = 0;
 
     //Initialize memory with 100 free spaces
     public Memory() {
@@ -20,8 +22,13 @@ public abstract class Memory {
             for (int i = startingIndex; i < startingIndex + process.getSize(); i++) {
                 memory.set(i, process.getName());
             }
-            
-            System.out.print("Allocated " + process.getName() + ": ");
+        	Random gen = new Random();
+        	double duration = gen.nextInt(5) + 1;
+        	System.out.print("Enter timestamp: ");
+        	System.out.printf("%.2f", (duration + time) / 60);
+        	System.out.println(" seconds");
+            time += duration;
+            System.out.print("[Enter] Memory map for Process " + process.getName() + ": ");
             printMemoryMap();
             return true;
         }
@@ -35,7 +42,7 @@ public abstract class Memory {
                 memory.set(i, ".");
             }
         }
-        System.out.print("Deallocated " + process.getName() + ": ");
+        System.out.print("[Exit] Memory map for Process " + process.getName() + ": ");
         printMemoryMap();
     }
 
