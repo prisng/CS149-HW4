@@ -4,7 +4,7 @@ import java.util.LinkedList;
 // Least Recently Used assumes that pages that were accessed recently are likely to be needed.
 // keeps a timestamp of last access, evicts the page with the lowest timestamp.
 
-public class LRUPaging extends Memory
+public class LRU extends Memory
 {
 
     private final LinkedList<Page> LRUCache = new LinkedList<>();
@@ -12,7 +12,7 @@ public class LRUPaging extends Memory
 
     // method gives disk access to memory, variable 'disk'
     // is what memory has access to
-    public LRUPaging(Disk d)
+    public LRU(Disk d)
     {
         super(d);
     }

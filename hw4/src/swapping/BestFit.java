@@ -2,7 +2,7 @@ package swapping;
 
 import java.util.ArrayList;
 
-public class BestFitMemory extends Memory {
+public class BestFit extends Memory {
 
     /**
      computes index where you need to start writing to memory, according to the best fit for the process

@@ -2,10 +2,10 @@ package paging;
 
 // FIFO Paging class. FIFO (First In First Out) works according to the First Come, First Served principle
 
-public class FIFOPaging extends Memory
+public class FIFO extends Memory
 {
 	
-    public FIFOPaging(Disk disk)
+    public FIFO(Disk disk)
     {
         super(disk);
     }

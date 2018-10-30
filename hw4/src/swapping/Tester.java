@@ -16,7 +16,7 @@ public class Tester {
 			System.setOut(swappingTextFile);
 			String output = "";
 
-			Memory[] fitAlgos = {new FirstFitMemory(), new NextFitMemory(), new BestFitMemory()};
+			Memory[] fitAlgos = {new FirstFit(), new NextFit(), new BestFit()};
 			// to print the algorithm names at the end of the output
 			String[] fitAlgoNames = {"First Fit", "Next Fit", "Best Fit"};
 

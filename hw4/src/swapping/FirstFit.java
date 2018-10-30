@@ -2,7 +2,7 @@ package swapping;
 
 import java.util.ArrayList; 
 
-public class FirstFitMemory extends Memory {
+public class FirstFit extends Memory {
 
     @Override
     // overrides the get index for first fit, simpler algorithm finds first available slot

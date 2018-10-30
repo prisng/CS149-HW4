@@ -5,13 +5,13 @@ import java.util.Random;
 /**
  * Implementation of random paging algorithm
  */
-public class RandomPaging extends Memory {
+public class RandomPick extends Memory {
 
 	// random number generator
     private final Random randomIndex = new Random();
 
     //Gives access to a disk to memory
-    public RandomPaging(Disk accessTo) {
+    public RandomPick(Disk accessTo) {
         super(accessTo);
     }
 

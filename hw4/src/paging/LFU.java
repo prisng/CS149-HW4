@@ -2,18 +2,11 @@ package paging;
 import java.util.ArrayList;
 import java.util.List;
 
-// LFU Paging class. Assumes that pages that have been accessed rarely are unlikely to
-// be accessed again. Maintains a count of how many times each page is accessed, and
-// evicts the page with the lowest count.
+public class LFU extends Memory {
+	
+    private final List<Page> referenceCounter = new ArrayList<>();	// keep track of page access
 
-public class LFUPaging extends Memory
-{
-    private final List<Page> referenceCounter = new ArrayList<>();
-
-    // method gives disk access to memory, variable 'disk'
-    // is what memory has access to
-    public LFUPaging(Disk d)
-    {
+    public LFU(Disk d) {
         super(d);
     }
 

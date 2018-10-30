@@ -9,33 +9,30 @@ import java.util.Random;
 
 public abstract class Memory {
 
+    private final int freePages = 4;
     private final Disk disk;
-    private final int maxPages = 4;
-    private final List<Page> pageFrames = new ArrayList<>();
     private Queue<Page> workloadQueue;
-    private int pageHits;
     private int time = 0;
+    private final List<Page> pageFrames = new ArrayList<>();
+    private int pageHits;
 
-    //Assigns disk access to memory
+    // create memory with disk access and workload queue
     public Memory(Disk d) {
         disk = d;
         workloadQueue = new LinkedList<Page>();
     }
 
-    
-    // Gets a requested page from memory, or from disk. And if memory cannot take it, it removes a page. 
-    // Arguments needed are the page being requested and the amount of references made
-  
+    // requests a page from memory or disk based on number of references made
     public Page requestPage(int page, int referencesMade) {
+    	System.out.print("Page reference " + referencesMade + ": ");
         Optional<Page> optPage = pageFrames.stream().filter(p -> p.getPageNumber() == page).findFirst();
-        System.out.print("Page reference " + referencesMade + ": ");
         pageFrames.stream().forEach(System.out::print);
         System.out.println();
         // generate workload as sorted queue based on arrival time
         if (optPage.isPresent()) {
         	workloadQueue.add(optPage.get());
-        	Random gen = new Random();
-        	double duration = gen.nextInt(5) + 1;
+        	Random rand = new Random();
+        	double duration = rand.nextInt(5) + 1;
         	System.out.print("Arrival time: ");
         	System.out.printf("%.2f", (duration + time) / 60);
         	System.out.println(" seconds");
@@ -46,7 +43,7 @@ public abstract class Memory {
         }
         
         System.out.println("Page " + page + " must be paged into memory");
-        if (pageFrames.size() == maxPages) {
+        if (pageFrames.size() == freePages) {
             int evictedIndex = getPageIndexToRemove();
             Page pageRemoved = pageFrames.remove(evictedIndex);
             System.out.println("Page " + pageRemoved.getPageNumber() + " has been evicted");

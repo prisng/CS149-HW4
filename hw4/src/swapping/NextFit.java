@@ -2,7 +2,7 @@ package swapping;
 
 import java.util.ArrayList;
 
-public class NextFitMemory extends Memory {
+public class NextFit extends Memory {
 
     private int lastAssignedIndex;
 

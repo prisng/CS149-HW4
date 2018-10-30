@@ -3,10 +3,10 @@ package paging;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MFUPaging extends Memory {
+public class MFU extends Memory {
     private final List<Page> refCounter = new ArrayList<>();
 
-    public MFUPaging(Disk d) {
+    public MFU(Disk d) {
         super(d);
     }
 

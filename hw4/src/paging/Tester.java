@@ -13,8 +13,8 @@ public class Tester {
 	        String output = ""; 
 	        
 	        Disk disk = new Disk();
-	        Memory[] algorithms = {new FIFOPaging(disk), new LRUPaging(disk), new LFUPaging(disk), new MFUPaging(disk), new RandomPaging(disk)};
-	        String[] algorithmNames = {"FIFO Paging", "LRU Paging", "LFU Paging", "MFU Paging", "Random Paging"};
+	        Memory[] algorithms = {new FIFO(disk), new LRU(disk), new LFU(disk), new MFU(disk), new RandomPick(disk)};
+	        String[] algorithmNames = {"FIFO", "LRU", "LFU", "MFU", "Random Pick"};
 	        
 	        for (int i = 0; i < algorithms.length; i++) {
 	            Process process = new Process(algorithms[i], i + 1);
