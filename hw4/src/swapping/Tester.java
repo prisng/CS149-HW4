@@ -3,9 +3,6 @@ package swapping;
 import java.io.IOException;
 import java.io.PrintStream;
 
-/**
- * Tester class for the output.
- */
 public class Tester {
 
 	public static void main(String[] args) {
@@ -16,6 +13,7 @@ public class Tester {
 			String output = "";
 
 			Memory[] fitAlgos = {new FirstFit(), new NextFit(), new BestFit()};
+			
 			// to print the algorithm names at the end of the output
 			String[] fitAlgoNames = {"First Fit", "Next Fit", "Best Fit"};
 

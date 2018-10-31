@@ -4,36 +4,34 @@ import java.util.ArrayList;
 
 public class BestFit extends Memory {
 
-    /**
-     computes index where you need to start writing to memory, according to the best fit for the process
-     * @param memory current memory
-     * @param proccess process to allocate memory for
-     * @return index of where to start allocating
-     */
     @Override
     public int getNextIndex(ArrayList<String> memory, SimulatedProcess proccess) {
-        ArrayList<Fitment> possibleIndices = new ArrayList<Fitment>(); // List of indexes that could be used
-        Fitment f = null; // Last stored index
+        ArrayList<Fitment> possibleIndices = new ArrayList<Fitment>();
+        Fitment f = null;
        
-        int freeCount = 0; // how much space you have free
-        
-        int start = -1; // first free space
+        // free space in memory
+        int freeCount = 0;
+        int start = -1;
         
         for (int j = 0; j < memory.size(); j++) {
-            if (memory.get(j).equals(".")) { // Check if space is free
-                if (start == -1)
-                    start = j; // Store starting index if start index is unset
-                freeCount++; // Increment free block counter
+        	// if the space is free, store the starting index
+            if (memory.get(j).equals(".")) {
+                if (start == -1) {
+                    start = j;	
+                }
+                // increment free block counter
+                freeCount++;
                 if (f != null)
-                    f.freeSpaceAfter++; // Increment empty space after storing
+                    f.freeSpaceAfter++;
             } else {
+            	// restart starting index and block counter
                 f = null;
-                freeCount = 0; // Reset free block counter
-                start = -1; // Reset start Index
+                freeCount = 0;
+                start = -1;
             }
-            if (freeCount == proccess.getSize()) { // Store start index if there is enough space
-                f = new Fitment(start, freeCount); // Keep track of empty space after allocation at that index
-                possibleIndices.add(f); // Store possible index
+            if (freeCount == proccess.getSize()) {
+                f = new Fitment(start, freeCount);
+                possibleIndices.add(f);
             }
         }
         possibleIndices.sort((f1, f2) -> Integer.compare(f1.freeSpaceAfter, f2.freeSpaceAfter));

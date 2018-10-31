@@ -2,48 +2,45 @@ package swapping;
 
 public class SimulatedProcess {
 
-    public static int nextpID = 0;
     private final int parentId;
-    private final char processName;
-    private final int pSize;
-    private int pDuration;
-    private boolean isFinished;
-    private static final String NAMES = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+    public static int nextID = 0;
+    private final char name;
+    private final int size;
+    private int duration;
+    private boolean finished;
+    private static final String NAME_CHARS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
 
-   
-    //Gets a process object with the specified size and duration
+    // creates a process with specified size/duration
     public SimulatedProcess(int aSize, int aDuration) {
-        parentId = nextpID++;
-        this.processName = NAMES.charAt(parentId % NAMES.length());
-        this.pSize = aSize;
-        this.pDuration = aDuration;
+        parentId = nextID++;
+        this.name = NAME_CHARS.charAt(parentId % NAME_CHARS.length());
+        this.size = aSize;
+        this.duration = aDuration;
     }
-
     
     public String getName() {
-        return String.valueOf(processName);
+        return String.valueOf(name);
     }
 
     public int getSize() {
-        return pSize;
+        return size;
     }
 
-    //A simulation of a process executing. Decreases remaining time
+    public boolean finished() {
+        return finished;
+    }
+    
     public void executing() {
-        pDuration -= 1;
-        if (pDuration <= 0) {
-            isFinished = true;
+        duration -= 1;
+        if (duration <= 0) {
+            finished = true;
         }
     }
-
    
-    public boolean isFinished() {
-        return isFinished;
-    }
 
     @Override
     public String toString() {
-        String result = "Name=" + processName + "/Size=" + pSize + "/Duration=" + pDuration;
+        String result = "Name=" + name + "/Size=" + size + "/Duration=" + duration;
         return result;
     }
 

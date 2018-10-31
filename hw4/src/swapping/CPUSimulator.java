@@ -33,7 +33,7 @@ public class CPUSimulator {
 		runningProcesses.clear();
 		currentTime = 0;
 		memory.reset();
-		SimulatedProcess.nextpID = 0;
+		SimulatedProcess.nextID = 0;
 	}
 
 	// generates new processes to add to scheduler
@@ -70,17 +70,17 @@ public class CPUSimulator {
 		// 1 loop = 1 second
 		while (currentTime <= SECONDS_TO_RUN) {
 			Iterator<SimulatedProcess> iter = runningProcesses.iterator();
-			// execute all running processes
+			// execute all processes
 			while (iter.hasNext()) {
 				SimulatedProcess p = iter.next();
 				p.executing(); 
-				if (p.isFinished()) {
+				// if the process is finished, remove it from the running process list
+				if (p.finished()) {
 					memory.deallocateMemory(p); 
-					iter.remove(); // Remove from running processes list
 				}
 			}
 			
-			// get the first process then add running process list if memory was successfully allocated
+			// add first process to process list
 			SimulatedProcess process = processes.peek();
 			if (memory.allocateMemory(process)) { 
 				System.out.println("Process added: " + process);
@@ -88,12 +88,11 @@ public class CPUSimulator {
 				processesSwappedIn++;
 			}
 
-			currentTime += 1; // Increase CPU time by 1 second
+			currentTime += 1;
 		}
 		stats.add(processesSwappedIn);
 	}
-
-
+	
 	// print statistics of average amount of processes swapped
 	public String printStats() {
 		OptionalDouble avgSwap = stats.stream().mapToDouble(a -> a).average();
