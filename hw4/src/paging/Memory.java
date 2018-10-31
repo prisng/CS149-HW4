@@ -57,24 +57,24 @@ public abstract class Memory {
    
     public abstract int getPageIndexToRemove();
 
-    //this is to allow subclasses to access memory page frames
+    // allows subclasses to access memory page frames
     protected List<Page> getPageFrames() {
         return pageFrames;
     }
 
     
-    //get the number of pages on disk
+    // gets number of pages on the disk
     public int getPagesOnDisk() {
         return disk.getPageSizeOnDisk();
     }
 
-    //the number of page hits during the current run 
+    // number of page hits during current run 
     public int getPageHits() {
         return pageHits;
     }
 
   
-    //reset the memory state of the page
+    // resets the memory state of page
     public void reset() {
         pageHits = 0;
         pageFrames.clear();

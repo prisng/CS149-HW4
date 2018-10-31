@@ -10,6 +10,7 @@ public class LRU extends Memory {
         super(d);
     }
 
+    // picks LRU page & returns index of page to remove
     @Override
     public int getPageIndexToRemove() {
         return getPageFrames().indexOf(cache.poll());

@@ -20,7 +20,7 @@ public class LFU extends Memory {
         return getPageFrames().indexOf(p);
     }
     
-    // resets reference counter
+    // resets reference counter and clears it
     @Override
     public void reset() {
         super.reset();
@@ -31,7 +31,7 @@ public class LFU extends Memory {
         references.clear();
     }
 
-    // returns the page being requested
+    // returns the requested page
     @Override
     public Page requestPage(int page, int numReferences) {
         Page p = super.requestPage(page, numReferences);
