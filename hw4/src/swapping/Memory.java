@@ -35,7 +35,7 @@ public abstract class Memory {
         return false;
     }
 
-   
+    // deallocates memory
     public void deallocateMemory(SimulatedProcess process) {
         for (int i = 0; i < mem.size(); i++) {
             if (mem.get(i).equals(process.getName())) {
@@ -46,6 +46,7 @@ public abstract class Memory {
         printMemoryMap();
     }
 
+    // prints the generate memory map
     public void printMemoryMap() {
     	mem.stream().forEach(System.out::print);
         System.out.println();

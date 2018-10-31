@@ -12,7 +12,7 @@ public class RandomPick extends Memory {
         super(accessTo);
     }
 
-    // get a rendom index to remove
+    // get a random index to remove
     @Override
     public int getPageIndexToRemove() {
 		// size = number of page frames
