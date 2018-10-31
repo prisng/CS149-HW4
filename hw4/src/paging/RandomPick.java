@@ -2,25 +2,20 @@ package paging;
 
 import java.util.Random;
 
-/**
- * Implementation of random paging algorithm
- */
+// random paging algorithm
 public class RandomPick extends Memory {
 
 	// random number generator
-    private final Random randomIndex = new Random();
+    private final Random random = new Random();
 
-    //Gives access to a disk to memory
     public RandomPick(Disk accessTo) {
         super(accessTo);
     }
 
-   
+    // get a rendom index to remove
     @Override
-    //Generates a random index to remove
     public int getPageIndexToRemove() {
-		// use randomIndex to generates pseudorandom number
-		// with size equal to number of page numbers
-        return randomIndex.nextInt(getPageFrames().size() - 1);
+		// size = number of page frames
+        return random.nextInt(getPageFrames().size() - 1);
     }
 }

@@ -5,7 +5,6 @@ import java.io.PrintStream;
 
 /**
  * Tester class for the output.
- *
  */
 public class Tester {
 

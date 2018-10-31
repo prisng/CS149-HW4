@@ -1,54 +1,37 @@
 package paging;
 import java.util.LinkedList;
 
-// Least Recently Used assumes that pages that were accessed recently are likely to be needed.
-// keeps a timestamp of last access, evicts the page with the lowest timestamp.
+public class LRU extends Memory {
 
-public class LRU extends Memory
-{
+	// linked list to represent cache
+    private final LinkedList<Page> cache = new LinkedList<>();
 
-    private final LinkedList<Page> LRUCache = new LinkedList<>();
-
-
-    // method gives disk access to memory, variable 'disk'
-    // is what memory has access to
-    public LRU(Disk d)
-    {
+    public LRU(Disk d) {
         super(d);
     }
 
-    // chooses Least Recently Used page, should be at index 0.
-    // returns index of page to remove
     @Override
-    public int getPageIndexToRemove()
-    {
-        return getPageFrames().indexOf(LRUCache.poll());
+    public int getPageIndexToRemove() {
+        return getPageFrames().indexOf(cache.poll());
+    }
+   
+    // clear cache list
+    @Override
+    public void reset() {
+        super.reset();
+        cache.clear();
     }
 
-    // override default requestPage method by keeping track of what pages were
-    // referenced after calling the requestPage method in Superclass.
-    // LRU cache order is Least recently used up front to Most recently used at the back.
-    // variable 'page' index of page to get
-    // variable 'referencesMade' holds current # of references made
-    // returns the requested page
     @Override
-    public Page requestPage(int page, int refsMade)
-    {
+    public Page requestPage(int page, int refsMade) {
         Page p = super.requestPage(page, refsMade);
-        if (LRUCache.contains(p)) // is page already in cache?
-            LRUCache.remove(p); // if true, move page to end of list
-                                    // to signify recent use by adding and deleting
-
-        LRUCache.addLast(p);    // append page to end of LRUCache List (end = most recent)
-
+        // if page is in the cache, move page to end of list
+        if (cache.contains(p)) {
+            cache.remove(p);	
+        }
+        // add page to end of cache list (most recent)
+        cache.addLast(p);
         return p;
     }
 
-    // clear LRUCache list
-    @Override
-    public void reset()
-    {
-        super.reset();
-        LRUCache.clear();
-    }
 }
